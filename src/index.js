@@ -121,6 +121,20 @@ const getWinsChange = (newWins, oldWins) => {
   return '';
 };
 
+const getEntryAtPosition = (entries, position) => {
+  return entries.filter(entry => entry.position === position)[0];
+};
+
+const hasChanged = (newEntries, oldEntries) => {
+  const changed = newEntries.filter(entry => {
+    const previousEntry = getEntryAtPosition(oldEntries, entry.position);
+    return (
+      entry.name !== previousEntry.name || entry.wins !== previousEntry.wins
+    );
+  });
+  return changed.length > 0;
+};
+
 const parseLeaderboard = (html, previousEntries = {}) => {
   const $ = cheerio.load(html);
   return $('.creator-ranking')
@@ -166,8 +180,9 @@ loadHTML(LEADERBOARD_URL).then(html => {
   const previousEntries = loadFile(DATA_FILE);
   const entries = parseLeaderboard(html, previousEntries);
 
-  if (!noSave) {
+  if (!noSave && hasChanged(entries, previousEntries)) {
     saveFile(DATA_FILE, entries);
+    console.log('Saved');
   }
 
   const output = printLeaderboard(entries, username, count);
