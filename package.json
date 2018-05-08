@@ -1,0 +1,29 @@
+{
+  "name": "mario-maker-leaderboard",
+  "version": "0.0.1",
+  "description": "Shows the top 10 people on the Super Expert Mario Maker leaderboard.",
+  "main": "src/index.js",
+  "scripts": {
+    "build": "babel src -d build",
+    "start": "npm run build && node build/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jobbogamer/mario-maker-leaderboard.git"
+  },
+  "author": "Josh Asch",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jobbogamer/mario-maker-leaderboard/issues"
+  },
+  "homepage": "https://github.com/jobbogamer/mario-maker-leaderboard#readme",
+  "dependencies": {
+    "axios": "^0.18.0",
+    "babel-cli": "^6.26.0",
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "cheerio": "^1.0.0-rc.2",
+    "columnify": "^1.5.4",
+    "minimist": "^1.2.0"
+  }
+}
