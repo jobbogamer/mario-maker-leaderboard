@@ -146,6 +146,7 @@ const parseLeaderboard = (html, previousEntries = {}) => {
 const printLeaderboard = (entries, highlightUsername, count = 10) => {
   const rows = entries.slice(0, count).map(entry => {
     const highlighted = s =>
+      !!highlightUsername &&
       highlightUsername.toLowerCase() === entry.name.toLowerCase()
         ? blue(s)
         : s;
@@ -182,7 +183,6 @@ loadHTML(LEADERBOARD_URL).then(html => {
 
   if (!noSave && hasChanged(entries, previousEntries)) {
     saveFile(DATA_FILE, entries);
-    console.log('Saved');
   }
 
   const output = printLeaderboard(entries, username, count);
